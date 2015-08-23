@@ -511,6 +511,8 @@ var Mustache = function () {
                 l,
                 scripts = document.getElementsByTagName('script'),
                 script,
+                    templates = document.getElementsByTagName('template'),
+                    template,
                 trash = [];
             for (i = 0, l = scripts.length; i < l; i++) {
                 script = scripts[i];
@@ -522,7 +524,13 @@ var Mustache = function () {
             for (i = 0, l = trash.length; i < l; i++) {
                 trash[i].parentNode.removeChild(trash[i]);
             }
+                for (i = 0; i < templates.length; i++) {
+                    template = templates[i];
+                    if (template && template.content && template.id) {
+                        ich.addTemplate(template.id, trim(template.content));
         }
+                }
+            }
     };
 
     // Export the ICanHaz object for **Node.js**, with
