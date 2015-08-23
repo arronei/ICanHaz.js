@@ -13,15 +13,15 @@ var Mustache = function () {
   var _toString = Object.prototype.toString;
 
   Array.isArray = Array.isArray || function (obj) {
-    return _toString.call(obj) == "[object Array]";
-  }
+            return _toString.call(obj) === "[object Array]";
+        };
 
   var _trim = String.prototype.trim, trim;
 
   if (_trim) {
     trim = function (text) {
-      return text == null ? "" : _trim.call(text);
-    }
+                return text === null ? "" : _trim.call(text);
+            };
   } else {
     var trimLeft, trimRight;
 
@@ -35,9 +35,9 @@ var Mustache = function () {
     }
 
     trim = function (text) {
-      return text == null ? "" :
+                return text === null ? "" :
         text.toString().replace(trimLeft, "").replace(trimRight, "");
-    }
+            };
   }
 
   var escapeMap = {
@@ -158,7 +158,7 @@ var Mustache = function () {
       if (!partials || partials[name] === undefined) {
         throw({message: "unknown_partial '" + name + "'"});
       }
-      if (!context || typeof context[name] != "object") {
+                if (!context || typeof context[name] !== "object") {
         return this.render(partials[name], context, partials, true);
       }
       return this.render(partials[name], context[name], partials, true);
@@ -224,7 +224,7 @@ var Mustache = function () {
           } else if (that.is_object(value)) { // Object, Use it as subcontext!
             renderedContent = that.render(content, that.create_context(value),
               partials, true);
-          } else if (typeof value == "function") {
+                        } else if (typeof value === "function") {
             // higher order section
             renderedContent = value.call(context, content, function (text) {
               return that.render(text, context, partials, true);
@@ -332,7 +332,7 @@ var Mustache = function () {
         }
       }
 
-      if (typeof value == "function") {
+                if (typeof value === "function") {
         return value.apply(context);
       }
       if (value !== undefined) {
@@ -345,14 +345,14 @@ var Mustache = function () {
     walk_context: function (name, context) {
       var path = name.split('.');
       // if the var doesn't exist in current context, check the top level context
-      var value_context = (context[path[0]] != undefined) ? context : this.context;
+                var value_context = (context[path[0]] !== undefined) ? context : this.context;
       var value = value_context[path.shift()];
-      while (value != undefined && path.length > 0) {
+                while (value !== undefined && path.length > 0) {
         value_context = value;
         value = value[path.shift()];
       }
       // if the value is a function, call it, binding the correct context
-      if (typeof value == "function") {
+                if (typeof value === "function") {
         return value.apply(value_context);
       }
       return value;
@@ -362,7 +362,7 @@ var Mustache = function () {
 
     /* includes tag */
     includes: function (needle, haystack) {
-      return haystack.indexOf(this.otag + needle) != -1;
+                return haystack.indexOf(this.otag + needle) !== -1;
     },
 
     // by @langalex, support for arrays of strings
@@ -381,14 +381,14 @@ var Mustache = function () {
     },
 
     is_object: function (a) {
-      return a && typeof a == "object";
+                return a && typeof a === "object";
     },
 
     /*
       Why, why, why? Because IE. Cry, cry cry.
     */
     map: function (array, fn) {
-      if (typeof array.map == "function") {
+                if (typeof array.map === "function") {
         return array.map(fn);
       } else {
         var r = [];
