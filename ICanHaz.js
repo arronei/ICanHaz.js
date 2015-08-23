@@ -447,8 +447,8 @@ var Mustache = function () {
 /*global  */
 (function () {
     function trim(stuff) {
-        if (''.trim) return stuff.trim();
-        else return stuff.replace(/^\s+/, '').replace(/\s+$/, '');
+            if (''.trim) { return stuff.trim(); }
+            else { return stuff.replace(/^\s+/, '').replace(/\s+$/, ''); }
     }
 
     // Establish the root object, `window` in the browser, or `global` on the server.
