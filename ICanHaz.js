@@ -508,20 +508,19 @@ var Mustache = function () {
         // not the partial. Or do it explicitly using <br/> or &nbsp;
         grabTemplates: function () {
             var i,
-                l,
                 scripts = document.getElementsByTagName('script'),
                 script,
                     templates = document.getElementsByTagName('template'),
                     template,
                 trash = [];
-            for (i = 0, l = scripts.length; i < l; i++) {
+                for (i = 0; i < scripts.length; i++) {
                 script = scripts[i];
                 if (script && script.innerHTML && script.id && (script.type === "text/html" || script.type === "text/x-icanhaz")) {
                     ich.addTemplate(script.id, trim(script.innerHTML));
                     trash.unshift(script);
                 }
             }
-            for (i = 0, l = trash.length; i < l; i++) {
+                for (i = 0; i < trash.length; i++) {
                 trash[i].parentNode.removeChild(trash[i]);
             }
                 for (i = 0; i < templates.length; i++) {
